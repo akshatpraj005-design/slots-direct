@@ -1,0 +1,1698 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PlayPitch — Your home for football stories, gaming news, matchday guides, reviews, and the latest in sports and gaming culture.">
+  <meta name="robots" content="index, follow">
+  <title>PlayPitch — Football, Games & Gaming Culture</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --navy:       #17132f;
+  --navy-mid:   #242044;
+  --sky:        #6558ff;
+  --sky-lt:     #9b83ff;
+  --teal:       #d6ff3f;
+  --teal-dk:    #bbeb20;
+  --amber:      #ff754a;
+  --amber-lt:   #fff0e9;
+  --mist:       #efedff;
+  --cloud:      #f8f7f2;
+  --white:      #ffffff;
+  --ink:        #17132f;
+  --ink-soft:   #615e74;
+  --ink-faint:  #858197;
+
+  --ff-display: 'Space Grotesk', system-ui, sans-serif;
+  --ff-body:    'Inter', system-ui, sans-serif;
+
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 32px;
+  --shadow:    0 8px 24px rgba(23,19,47,.09);
+  --shadow-lg: 0 20px 56px rgba(23,19,47,.16);
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--ff-body);
+  background:var(--cloud);
+  color:var(--ink);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font-family:var(--ff-body);}
+
+/* ═══════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════ */
+.container{width:100%;max-width:1160px;margin:0 auto;padding:0 28px;}
+.tag{
+  display:inline-block;
+  font-family:var(--ff-display);
+  font-size:.7rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 12px;border-radius:99px;
+  background:rgba(0,196,167,.12);color:var(--teal);
+}
+.tag-amber{background:var(--amber-lt);color:#c07a00;}
+.tag-sky{background:rgba(26,111,168,.12);color:var(--sky);}
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--ff-display);font-weight:600;font-size:.92rem;
+  padding:13px 26px;border-radius:99px;border:none;
+  cursor:pointer;transition:transform .18s,box-shadow .18s,background .15s,color .15s;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.btn-teal{background:var(--teal);color:var(--navy);}
+.btn-teal:hover{background:var(--teal-dk);}
+.btn-amber{background:var(--amber);color:var(--navy);}
+.btn-amber:hover{background:#d4890a;}
+.btn-ghost{background:rgba(255,255,255,.1);color:var(--white);border:1.5px solid rgba(255,255,255,.3);}
+.btn-ghost:hover{background:rgba(255,255,255,.2);}
+.btn-outline{background:transparent;color:var(--sky);border:2px solid var(--sky);}
+.btn-outline:hover{background:var(--sky);color:var(--white);}
+.btn-sm{padding:9px 20px;font-size:.82rem;}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav{
+  position:sticky;top:0;z-index:300;
+  background:rgba(10,22,40,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.nav-inner{
+  display:flex;align-items:center;
+  justify-content:space-between;height:62px;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.2rem;color:var(--white);
+}
+.nav-logo-icon{
+  width:32px;height:32px;
+  background:linear-gradient(135deg,var(--teal),var(--amber));
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+.nav-logo span{color:var(--teal);}
+.nav-links{display:flex;align-items:center;gap:26px;}
+.nav-links a{
+  font-size:.88rem;font-weight:500;
+  color:rgba(255,255,255,.6);
+  transition:color .15s;
+}
+.nav-links a:hover{color:var(--teal);}
+.nav-cta{padding:9px 20px !important;font-size:.84rem !important;}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  background:var(--navy);
+  min-height:92vh;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  padding:80px 0 60px;
+}
+
+/* Sky gradient layers */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 75% 85% at 95% 55%, rgba(101,88,255,.42) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 55% at 8% 90%, rgba(255,117,74,.2) 0%, transparent 60%);
+  pointer-events:none;
+}
+
+/* Horizon glow line */
+.hero::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--teal), var(--amber), transparent);
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+  position:relative;z-index:2;
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:22px;
+}
+.hero-eyebrow-pulse{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--teal);
+  box-shadow:0 0 0 3px rgba(0,196,167,.25);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 3px rgba(0,196,167,.25);}
+  50%{box-shadow:0 0 0 8px rgba(0,196,167,.08);}
+}
+.hero-eyebrow-text{
+  font-family:var(--ff-display);
+  font-size:.75rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--teal);
+}
+.hero h1{
+  font-family:var(--ff-display);
+  font-size:clamp(2.6rem,4.8vw,3.8rem);
+  font-weight:700;line-height:1.08;
+  color:var(--white);margin-bottom:22px;
+}
+.hero h1 .line-accent{
+  display:block;
+  background:linear-gradient(90deg,var(--teal),#fff,var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{
+  font-size:1.05rem;color:rgba(255,255,255,.65);
+  max-width:430px;line-height:1.75;margin-bottom:36px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px;}
+.hero-stats{
+  display:flex;gap:32px;
+  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+.hero-stat-val{
+  font-family:var(--ff-display);
+  font-size:1.6rem;font-weight:700;color:var(--white);
+  line-height:1;margin-bottom:4px;
+}
+.hero-stat-val span{color:var(--teal);font-size:1rem;}
+.hero-stat-label{font-size:.78rem;color:rgba(255,255,255,.45);letter-spacing:.04em;}
+
+/* ─── FOOTBALL & GAMING HERO VISUAL ──────── */
+.hero-visual{display:flex;align-items:center;justify-content:center;position:relative;}
+.game-scene{
+  position:relative;width:500px;height:460px;display:flex;
+  align-items:center;justify-content:center;
+  filter:drop-shadow(0 28px 40px rgba(0,0,0,.25));
+}
+.hero-art{width:100%;height:100%;overflow:visible;animation:art-float 5s ease-in-out infinite;}
+@keyframes art-float{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-10px) rotate(1deg);}}
+.hero-art .art-orbit{transform-origin:250px 230px;animation:orbit-spin 32s linear infinite;}
+@keyframes orbit-spin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.hero-art,.hero-art .art-orbit{animation:none;}}
+.game-card{
+  position:absolute;z-index:2;background:rgba(36,32,68,.96);
+  border:1px solid rgba(214,255,63,.5);border-radius:14px;
+  padding:13px 17px;backdrop-filter:blur(12px);box-shadow:0 12px 35px rgba(0,0,0,.28);
+}
+.game-card-a{top:30px;right:0;transform:rotate(5deg);}
+.game-card-b{bottom:30px;left:0;transform:rotate(-6deg);}
+.game-card-label{font-size:.68rem;color:rgba(255,255,255,.55);letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px;}
+.game-card-value{font-family:var(--ff-display);font-size:1rem;font-weight:700;color:var(--teal);}
+
+/* ═══════════════════════════════════════════
+   TICKER STRIP
+═══════════════════════════════════════════ */
+.ticker{
+  background:var(--navy-mid);
+  border-top:1px solid rgba(0,196,167,.15);
+  border-bottom:1px solid rgba(0,196,167,.15);
+  padding:11px 0;
+  overflow:hidden;
+}
+.ticker-inner{
+  display:flex;gap:0;
+  animation:ticker 28s linear infinite;
+  width:max-content;
+}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){.ticker-inner{animation:none;overflow-x:auto;}}
+.ticker-item{
+  display:flex;align-items:center;gap:8px;
+  padding:0 36px;
+  font-family:var(--ff-display);font-size:.78rem;font-weight:500;
+  color:rgba(255,255,255,.55);
+  border-right:1px solid rgba(255,255,255,.08);
+  white-space:nowrap;
+}
+.ticker-item strong{color:var(--teal);}
+
+/* ═══════════════════════════════════════════
+   PLAYPITCH VISUAL POLISH
+═══════════════════════════════════════════ */
+.nav{background:rgba(23,19,47,.94);border-bottom-color:rgba(255,255,255,.1);}
+.nav-logo{font-size:1.28rem;letter-spacing:-.04em;}
+.nav-logo span{color:var(--teal);}
+.nav-links{gap:30px;}
+.nav-links a{font-weight:600;color:rgba(255,255,255,.72);}
+.nav-links a:hover{color:var(--teal);}
+.hero{min-height:min(780px,92vh);padding:76px 0 72px;}
+.hero-grid{grid-template-columns:.92fr 1.08fr;gap:30px;}
+.hero h1{font-size:clamp(3.4rem,6.3vw,5.8rem);letter-spacing:-.075em;line-height:.99;margin-bottom:26px;}
+.hero-eyebrow{padding:9px 15px;border:1px solid rgba(214,255,63,.25);border-radius:99px;background:rgba(214,255,63,.07);width:max-content;}
+.hero-eyebrow-pulse{background:var(--amber);box-shadow:0 0 0 4px rgba(255,117,74,.2);}
+.hero-eyebrow-text{font-size:.72rem;letter-spacing:.14em;color:var(--teal);}
+.hero-sub{font-size:1.08rem;max-width:470px;color:rgba(255,255,255,.74);}
+.hero-actions{gap:14px;}
+.btn{font-size:.94rem;letter-spacing:-.01em;}
+.btn-teal{background:var(--teal);color:var(--navy);}
+.btn-teal:hover{background:#e4ff81;}
+.btn-amber{background:var(--amber);color:#fff;}
+.btn-amber:hover{background:#ff8b64;}
+.btn-ghost{border-color:rgba(255,255,255,.26);}
+.ticker{background:var(--teal);border:0;padding:14px 0;}
+.ticker-item{font-size:.82rem;color:var(--navy);border-right-color:rgba(23,19,47,.16);}
+.ticker-item strong{color:#5945ee;}
+.section{padding:100px 0;}
+.section-sky{background:var(--mist);}
+.sec-title{letter-spacing:-.055em;font-size:clamp(2.15rem,4vw,3.25rem);}
+.sec-header{margin-bottom:48px;}
+.tag{background:rgba(101,88,255,.1);color:#5547e8;}
+.tag-amber{background:var(--amber-lt);color:#c84a22;}
+.tag-sky{background:rgba(101,88,255,.1);color:#5547e8;}
+.topics-grid{gap:18px;}
+.topic-card{border:1px solid rgba(23,19,47,.07);border-radius:22px;box-shadow:0 8px 24px rgba(23,19,47,.035);}
+.topic-card:hover{border-color:var(--sky);box-shadow:0 20px 42px rgba(101,88,255,.15);}
+.topic-card-top{padding:30px 26px 24px;}
+.topic-icon{width:60px;height:60px;border-radius:18px;font-size:1.8rem;box-shadow:0 8px 18px rgba(23,19,47,.08);}
+.topic-card h3{font-size:1.12rem;letter-spacing:-.025em;}
+.topic-card p{color:#6c687b;}
+.topic-card-footer{border-top-color:rgba(23,19,47,.07);}
+.topic-articles{color:#858197;}
+.topic-arrow,.art-card-read{color:#5547e8;}
+.articles-grid{gap:20px;}
+.art-card{border-radius:22px;box-shadow:0 12px 30px rgba(23,19,47,.08);}
+.art-card:hover{box-shadow:0 22px 48px rgba(23,19,47,.15);}
+.art-card-img{height:205px;font-size:4rem;}
+.art-card-img::before,.art-card-img::after{content:"";position:absolute;border-radius:50%;pointer-events:none;}
+.art-card-img::before{width:190px;height:190px;border:1px solid rgba(255,255,255,.2);transform:translate(105px,-55px);}
+.art-card-img::after{width:105px;height:105px;background:rgba(255,255,255,.09);transform:translate(-125px,55px);}
+.art-card-img{isolation:isolate;}
+.art-card-img{ text-shadow:0 8px 18px rgba(0,0,0,.22); }
+.art-card-featured .art-card-img{height:270px;font-size:5.2rem;}
+.art-card-title{letter-spacing:-.025em;}
+.calc-strip{background:linear-gradient(118deg,#5945ee 0%,#7959ff 48%,#ff754a 120%);border-radius:28px;box-shadow:0 24px 60px rgba(89,69,238,.2);}
+.calc-strip::before{content:"⚽";right:145px;font-size:150px;opacity:.12;transform:translateY(-50%) rotate(-16deg);}
+.calc-strip h2{font-size:clamp(1.9rem,3.5vw,2.8rem);letter-spacing:-.05em;}
+.calc-strip p{color:rgba(255,255,255,.88);}
+.guide-card{border-radius:22px;border-color:rgba(23,19,47,.07);box-shadow:0 8px 24px rgba(23,19,47,.04);}
+.guide-card:hover{border-color:var(--amber);box-shadow:0 18px 40px rgba(255,117,74,.12);}
+.guide-icon{width:64px;height:64px;min-width:64px;border-radius:20px;box-shadow:0 8px 18px rgba(23,19,47,.08);}
+.guide-card h3{letter-spacing:-.025em;font-size:1.08rem;}
+.guide-link{color:#5547e8;}
+.newsletter-wrap{background:linear-gradient(135deg,#201b42 0%,#31265f 65%,#563de1 130%);border:1px solid rgba(214,255,63,.24);box-shadow:0 24px 60px rgba(23,19,47,.16);}
+.newsletter-wrap h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-.05em;}
+.newsletter-wrap::before{background:radial-gradient(ellipse 40% 70% at 15% 20%,rgba(255,117,74,.14) 0%,transparent 70%),radial-gradient(ellipse 50% 60% at 88% 80%,rgba(214,255,63,.13) 0%,transparent 70%);}
+.nl-btn{background:var(--teal);color:var(--navy);}
+footer{background:#17132f;}
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .hero h1{font-size:clamp(3rem,6vw,4.4rem);}
+  .game-scene{width:100%;height:auto;aspect-ratio:500/460;}
+  .game-card-a{right:-4px;}
+}
+@media(max-width:640px){
+  .hero{padding:56px 0 44px;}
+  .hero-grid{grid-template-columns:1fr;gap:20px;}
+  .hero h1{font-size:clamp(3.1rem,13vw,4.6rem);}
+  .hero-sub{font-size:1rem;}
+  .hero-visual{margin:0 -10px;}
+  .game-scene{max-width:440px;}
+  .game-card{padding:10px 13px;}
+  .game-card-a{top:5%;right:2%;}
+  .game-card-b{bottom:3%;left:2%;}
+  .ticker-item{padding:0 22px;}
+  .section{padding:70px 0;}
+  .art-card-img{height:190px;}
+  .art-card-featured .art-card-img{height:220px;}
+  .calc-strip::before{right:12px;font-size:100px;}
+}
+
+/* ═══════════════════════════════════════════
+   AD SLOTS
+═══════════════════════════════════════════ */
+.ad-slot{
+  background:var(--mist);
+  border:1.5px dashed rgba(26,111,168,.2);
+  border-radius:var(--r-md);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.73rem;color:var(--ink-faint);
+  letter-spacing:.07em;text-transform:uppercase;font-weight:500;
+}
+.ad-leaderboard{min-height:90px;margin:32px 0;}
+.ad-billboard{min-height:200px;margin:40px 0;}
+.ad-rect{min-height:250px;max-width:336px;}
+
+/* ═══════════════════════════════════════════
+   SECTIONS SHARED
+═══════════════════════════════════════════ */
+.section{padding:88px 0;}
+.section-sky{background:var(--mist);}
+.section-navy{background:var(--navy);color:var(--white);}
+.section-white{background:var(--white);}
+
+.sec-header{margin-bottom:56px;}
+.sec-header.center{text-align:center;}
+.sec-header.center .sec-sub{margin:0 auto;}
+.sec-eyebrow{margin-bottom:14px;}
+.sec-title{
+  font-family:var(--ff-display);
+  font-size:clamp(1.9rem,3vw,2.7rem);
+  font-weight:700;line-height:1.12;
+  margin-bottom:14px;color:var(--ink);
+}
+.section-navy .sec-title{color:var(--white);}
+.sec-sub{
+  font-size:1rem;color:var(--ink-soft);
+  max-width:520px;line-height:1.75;
+}
+.section-navy .sec-sub{color:rgba(255,255,255,.58);}
+
+/* ═══════════════════════════════════════════
+   TOPICS GRID
+═══════════════════════════════════════════ */
+.topics-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.topic-card{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  border:1.5px solid rgba(10,22,40,.07);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+  cursor:pointer;
+}
+.topic-card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--teal);
+}
+.topic-card-top{
+  padding:28px 24px 20px;
+  position:relative;
+}
+.topic-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:16px;
+}
+.topic-card h3{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.05rem;margin-bottom:8px;
+}
+.topic-card p{font-size:.88rem;color:var(--ink-soft);line-height:1.65;}
+.topic-card-footer{
+  padding:14px 24px;
+  border-top:1px solid rgba(10,22,40,.06);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.topic-articles{font-size:.76rem;color:var(--ink-faint);}
+.topic-arrow{
+  font-size:.82rem;font-weight:600;
+  color:var(--sky);
+  display:flex;align-items:center;gap:4px;
+  transition:gap .15s;
+}
+.topic-card:hover .topic-arrow{gap:8px;}
+
+/* ═══════════════════════════════════════════
+   FEATURED ARTICLES
+═══════════════════════════════════════════ */
+.articles-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:24px;
+}
+.art-card{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:transform .2s,box-shadow .2s;
+}
+.art-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.art-card-img{
+  height:180px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;overflow:hidden;
+}
+.art-card-featured .art-card-img{height:240px;font-size:4rem;}
+.art-card-body{padding:20px;}
+.art-card-tag{margin-bottom:8px;}
+.art-card-title{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:.98rem;line-height:1.3;margin-bottom:8px;
+}
+.art-card-featured .art-card-title{font-size:1.2rem;}
+.art-card-desc{font-size:.84rem;color:var(--ink-soft);line-height:1.65;margin-bottom:14px;}
+.art-card-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.75rem;color:var(--ink-faint);
+}
+.art-card-read{
+  font-size:.8rem;font-weight:600;color:var(--sky);
+  display:flex;align-items:center;gap:4px;transition:gap .15s;
+}
+.art-card:hover .art-card-read{gap:8px;}
+
+/* ═══════════════════════════════════════════
+   FAN ZONE PROMO
+═══════════════════════════════════════════ */
+.calc-strip{
+  background:linear-gradient(135deg,var(--teal-dk) 0%,var(--sky) 100%);
+  border-radius:var(--r-xl);
+  padding:56px 64px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:40px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.calc-strip::before{
+  content:'⚡';
+  position:absolute;right:160px;top:50%;transform:translateY(-50%);
+  font-size:120px;opacity:.06;pointer-events:none;
+}
+.calc-strip h2{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:clamp(1.5rem,2.5vw,2rem);
+  color:var(--white);margin-bottom:10px;
+}
+.calc-strip p{font-size:.96rem;color:rgba(255,255,255,.8);max-width:460px;}
+
+/* ═══════════════════════════════════════════
+   STATS ROW
+═══════════════════════════════════════════ */
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+}
+.stat-block{
+  padding:44px 36px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.stat-block:last-child{border-right:none;}
+.stat-num{
+  font-family:var(--ff-display);font-size:2.8rem;font-weight:700;
+  color:var(--teal);line-height:1;margin-bottom:8px;
+}
+.stat-num sup{font-size:1.2rem;vertical-align:super;}
+.stat-desc{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.5;}
+
+/* ═══════════════════════════════════════════
+   GUIDE CARDS
+═══════════════════════════════════════════ */
+.guides-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+}
+.guide-card{
+  background:var(--white);
+  border-radius:var(--r-lg);
+  padding:30px;
+  display:flex;gap:20px;
+  border:1.5px solid rgba(10,22,40,.06);
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+.guide-card:hover{
+  border-color:var(--teal);
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+}
+.guide-icon{
+  width:56px;height:56px;min-width:56px;
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;
+}
+.guide-card h3{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1rem;margin-bottom:6px;
+}
+.guide-card p{font-size:.86rem;color:var(--ink-soft);line-height:1.65;margin-bottom:12px;}
+.guide-link{
+  font-size:.82rem;font-weight:600;color:var(--teal);
+  display:flex;align-items:center;gap:5px;transition:gap .15s;
+}
+.guide-card:hover .guide-link{gap:9px;}
+
+/* ═══════════════════════════════════════════
+   NEWSLETTER
+═══════════════════════════════════════════ */
+.newsletter-wrap{
+  background:var(--navy-mid);
+  border-radius:var(--r-xl);
+  padding:64px;
+  text-align:center;
+  position:relative;overflow:hidden;
+  border:1px solid rgba(0,196,167,.15);
+}
+.newsletter-wrap::before{
+  content:'';position:absolute;
+  inset:-40px;
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 50%, rgba(0,196,167,.07) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(26,111,168,.07) 0%,transparent 60%);
+  pointer-events:none;
+}
+.newsletter-wrap > *{position:relative;z-index:1;}
+.newsletter-wrap h2{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:clamp(1.6rem,2.8vw,2.2rem);
+  color:var(--white);margin-bottom:10px;
+}
+.newsletter-wrap p{
+  font-size:1rem;color:rgba(255,255,255,.58);
+  max-width:480px;margin:0 auto 32px;
+}
+.nl-form{
+  display:flex;gap:10px;max-width:460px;
+  margin:0 auto;flex-wrap:wrap;justify-content:center;
+}
+.nl-input{
+  flex:1;min-width:200px;
+  padding:13px 20px;border-radius:99px;
+  border:1.5px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.07);
+  color:var(--white);font-family:var(--ff-body);font-size:.92rem;
+  outline:none;transition:border-color .15s;
+}
+.nl-input::placeholder{color:rgba(255,255,255,.35);}
+.nl-input:focus{border-color:var(--teal);}
+.nl-btn{
+  padding:13px 28px;border-radius:99px;border:none;
+  background:var(--teal);color:var(--navy);
+  font-family:var(--ff-display);font-weight:700;font-size:.9rem;
+  cursor:pointer;transition:background .15s,transform .15s;
+  white-space:nowrap;
+}
+.nl-btn:hover{background:var(--teal-dk);transform:translateY(-1px);}
+.nl-note{font-size:.74rem;color:rgba(255,255,255,.35);margin-top:14px;}
+.nl-note button{
+  background:none;border:none;color:rgba(255,255,255,.5);
+  text-decoration:underline;cursor:pointer;font-size:inherit;
+}
+.nl-note button:hover{color:var(--teal);}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{
+  background:var(--navy);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:60px 0 32px;
+  color:rgba(255,255,255,.5);
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2.2fr 1fr 1fr 1fr;
+  gap:44px;margin-bottom:48px;
+}
+.footer-brand{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.2rem;color:var(--white);
+  display:flex;align-items:center;gap:9px;
+  margin-bottom:12px;
+}
+.footer-brand span{color:var(--teal);}
+.footer-brand-icon{
+  width:28px;height:28px;border-radius:7px;
+  background:linear-gradient(135deg,var(--teal),var(--sky));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;
+}
+.footer-desc{font-size:.86rem;line-height:1.7;margin-bottom:18px;}
+.footer-email a{font-size:.84rem;color:var(--teal);}
+.footer-col h4{
+  font-family:var(--ff-display);font-weight:600;
+  font-size:.88rem;letter-spacing:.05em;
+  color:var(--white);margin-bottom:16px;
+}
+.footer-col li{margin-bottom:9px;}
+.footer-col a{
+  font-size:.84rem;color:rgba(255,255,255,.45);
+  transition:color .15s;
+}
+.footer-col a:hover{color:var(--teal);}
+.footer-modal-btn{
+  background:none;border:none;padding:0;
+  font-size:.84rem;color:rgba(255,255,255,.45);
+  cursor:pointer;transition:color .15s;text-align:left;
+  font-family:var(--ff-body);
+}
+.footer-modal-btn:hover{color:var(--teal);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.07);
+  padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-copy{font-size:.78rem;}
+.footer-legal{display:flex;gap:20px;}
+.footer-legal button{
+  font-size:.78rem;color:rgba(255,255,255,.35);
+  background:none;border:none;cursor:pointer;
+  font-family:var(--ff-body);transition:color .15s;
+}
+.footer-legal button:hover{color:var(--teal);}
+
+/* ═══════════════════════════════════════════
+   MODALS
+═══════════════════════════════════════════ */
+.modal-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(5,12,22,.8);
+  z-index:900;
+  align-items:flex-start;justify-content:center;
+  padding:36px 20px;
+  overflow-y:auto;
+  backdrop-filter:blur(6px);
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:var(--white);
+  border-radius:var(--r-xl);
+  max-width:700px;width:100%;
+  margin:auto;overflow:hidden;
+  box-shadow:0 32px 96px rgba(0,0,0,.4);
+  animation:mIn .26s cubic-bezier(.22,1,.36,1);
+}
+@keyframes mIn{
+  from{opacity:0;transform:translateY(22px) scale(.97);}
+  to{opacity:1;transform:none;}
+}
+.modal-head{
+  background:var(--navy);
+  padding:26px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-head-left{display:flex;align-items:center;gap:12px;}
+.modal-head-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--teal),var(--sky));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+.modal-head h2{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1.2rem;color:var(--white);
+}
+.modal-close{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:none;
+  color:rgba(255,255,255,.7);font-size:1.1rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s;line-height:1;
+}
+.modal-close:hover{background:rgba(255,255,255,.2);}
+.modal-content{
+  padding:32px;
+  overflow-y:auto;max-height:68vh;
+}
+.modal-updated{
+  display:inline-block;
+  font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  background:rgba(0,196,167,.1);color:var(--teal-dk);
+  padding:3px 10px;border-radius:99px;margin-bottom:22px;
+}
+.modal-content h3{
+  font-family:var(--ff-display);font-weight:700;
+  font-size:1rem;color:var(--ink);
+  margin:22px 0 8px;
+}
+.modal-content h3:first-of-type{margin-top:0;}
+.modal-content p{font-size:.9rem;color:var(--ink-soft);line-height:1.78;margin-bottom:10px;}
+.modal-content ul.mlist{
+  padding-left:18px;list-style:disc;margin-bottom:12px;
+}
+.modal-content ul.mlist li{
+  font-size:.9rem;color:var(--ink-soft);margin-bottom:6px;line-height:1.65;
+}
+.modal-content a{color:var(--sky);text-decoration:underline;}
+.modal-content .contact-row{
+  display:flex;align-items:center;gap:14px;
+  background:var(--cloud);border-radius:var(--r-md);
+  padding:16px 18px;margin-bottom:12px;
+}
+.modal-content .contact-row-icon{font-size:1.3rem;}
+.modal-content .contact-row-label{
+  font-size:.76rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:2px;
+}
+.modal-content .contact-row-val a{font-size:.9rem;color:var(--sky);text-decoration:none;}
+.modal-foot{
+  padding:14px 32px 24px;
+  border-top:1px solid rgba(10,22,40,.07);
+  text-align:right;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:48px;}
+  .game-scene{width:340px;height:340px;}
+  .topics-grid{grid-template-columns:repeat(2,1fr);}
+  .articles-grid{grid-template-columns:1fr 1fr;}
+  .art-card-featured{grid-column:span 2;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .stat-block{border-right:none;border-bottom:1px solid rgba(255,255,255,.07);}
+  .guides-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .calc-strip{grid-template-columns:1fr;text-align:center;}
+  .calc-strip p{margin:0 auto;}
+  .newsletter-wrap{padding:44px 32px;}
+}
+@media(max-width:640px){
+  .nav-links{display:none;}
+  .topics-grid{grid-template-columns:1fr;}
+  .articles-grid{grid-template-columns:1fr;}
+  .art-card-featured{grid-column:auto;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .hero{min-height:auto;padding:60px 0 48px;}
+  .game-scene{width:280px;height:280px;}
+  .calc-strip{padding:36px 28px;}
+  .newsletter-wrap{padding:36px 24px;}
+  .section{padding:64px 0;}
+}
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:24px;}
+  .game-scene{width:min(100%,500px);height:auto;aspect-ratio:500/460;}
+}
+@media(max-width:640px){
+  .game-scene{width:min(100%,390px);max-width:390px;height:auto;aspect-ratio:500/460;}
+}
+
+/* Editorial magazine layout */
+html{scroll-padding-top:78px;}
+body{background:#f5f3ed;}
+.container{max-width:1280px;padding-inline:clamp(20px,4vw,56px);}
+.nav{background:rgba(23,19,47,.97);border-bottom:3px solid var(--teal);}
+.nav-inner{height:76px;}
+.nav-logo{font-size:1.45rem;letter-spacing:-.06em;}
+.nav-links a{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;}
+.btn{border-radius:10px;text-transform:uppercase;letter-spacing:.04em;font-size:.82rem;}
+.btn-teal{box-shadow:4px 4px 0 #91b516;}
+.btn-ghost{border-radius:10px;}
+.hero{min-height:calc(100vh - 76px);background:#f5f3ed;padding:72px 0 66px;}
+.hero::before{
+  background:
+    radial-gradient(ellipse 60% 90% at 100% 12%,rgba(101,88,255,.08),transparent 72%),
+    radial-gradient(ellipse 50% 90% at 0% 100%,rgba(255,117,74,.08),transparent 70%);
+}
+.hero::after{height:6px;background:linear-gradient(90deg,var(--teal) 0 34%,var(--sky) 34% 68%,var(--amber) 68%);}
+.hero-grid{grid-template-columns:.88fr 1.12fr;gap:clamp(24px,5vw,76px);}
+.hero-eyebrow{border-color:rgba(23,19,47,.15);background:rgba(255,255,255,.7);}
+.hero-eyebrow-text{color:#5547e8;}
+.hero-eyebrow-pulse{background:var(--amber);box-shadow:0 0 0 4px rgba(255,117,74,.18);}
+.hero h1{color:var(--navy);font-size:clamp(4.2rem,8vw,7.8rem);line-height:.88;letter-spacing:-.095em;}
+.hero h1 .line-accent{background:linear-gradient(100deg,#5744ec,#ff754a);-webkit-background-clip:text;background-clip:text;}
+.hero-sub{color:#615e74;font-size:1rem;max-width:410px;}
+.hero-actions{margin-bottom:0;}
+.btn-ghost{color:var(--navy);background:#fff;border:1.5px solid rgba(23,19,47,.2);}
+.btn-ghost:hover{background:#fff;box-shadow:4px 4px 0 rgba(23,19,47,.14);}
+.hero-visual{
+  min-height:490px;border-radius:34px;overflow:hidden;
+  background:linear-gradient(145deg,#d6ff3f 0%,#a9eb31 42%,#7bc928 100%);
+  box-shadow:14px 14px 0 #6558ff;
+}
+.hero-visual::before,.hero-visual::after{content:"";position:absolute;border-radius:50%;pointer-events:none;}
+.hero-visual::before{width:390px;height:390px;right:-100px;top:-150px;border:1px solid rgba(23,19,47,.16);box-shadow:0 0 0 35px rgba(255,255,255,.07),0 0 0 70px rgba(255,255,255,.06);}
+.hero-visual::after{width:260px;height:260px;left:-100px;bottom:-140px;background:rgba(255,255,255,.13);}
+.game-scene{width:min(100%,540px);height:auto;aspect-ratio:500/460;filter:drop-shadow(0 20px 18px rgba(23,19,47,.17));}
+.hero-art{position:relative;z-index:1;}
+.game-card{background:#201b42;border:2px solid #fff;border-radius:8px;box-shadow:5px 5px 0 rgba(23,19,47,.28);}
+.game-card-a{top:7%;right:4%;}
+.game-card-b{bottom:7%;left:4%;}
+.ticker{background:#ff754a;padding:15px 0;}
+.ticker-item{font-size:.78rem;text-transform:uppercase;letter-spacing:.045em;color:#fff;border-right-color:rgba(255,255,255,.26);}
+.ticker-item strong{color:#201b42;}
+.section{padding:clamp(70px,9vw,126px) 0;}
+.section-white{background:#f5f3ed;}
+.section-sky{background:#eeecff;}
+.sec-header{margin-bottom:42px;max-width:780px;}
+.sec-header .tag{margin-bottom:12px;}
+.sec-title{font-size:clamp(2.6rem,5vw,4.6rem);line-height:.96;letter-spacing:-.075em;}
+.sec-sub{font-size:.98rem;}
+#topics{background:#201b42;color:#fff;position:relative;overflow:hidden;}
+#topics::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 100% 0%,rgba(101,88,255,.28),transparent 75%);pointer-events:none;}
+#topics .container{position:relative;z-index:1;}
+#topics .sec-title{color:#fff;}
+#topics .sec-sub{color:rgba(255,255,255,.65);}
+#topics .tag{background:rgba(214,255,63,.13);color:var(--teal);}
+.topics-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.topic-card{
+  min-height:230px;position:relative;background:#2b2650;color:#fff;
+  border:1px solid rgba(255,255,255,.1);border-radius:8px;
+  box-shadow:none;display:flex;flex-direction:column;justify-content:space-between;
+  transition:transform .22s,border-color .22s,background .22s;
+}
+.topic-card::after{content:"";position:absolute;right:18px;top:18px;width:7px;height:7px;border-radius:50%;background:var(--teal);opacity:.9;}
+.topic-card-top{padding:25px 25px 16px;}
+.topic-icon{width:62px;height:62px;border-radius:15px;margin-bottom:20px;background:#3a3562!important;font-size:1.9rem;box-shadow:none;}
+.topic-card h3{font-size:1.1rem;letter-spacing:-.035em;}
+.topic-card p{color:rgba(255,255,255,.66);}
+.topic-card-footer{border-top:1px solid rgba(255,255,255,.1);padding:13px 25px;}
+.topic-articles{color:rgba(255,255,255,.45);}
+.topic-arrow{color:var(--teal);}
+.topic-card:nth-child(3n + 2) .topic-icon{background:rgba(255,117,74,.19)!important;}
+.topic-card:nth-child(3n) .topic-icon{background:rgba(101,88,255,.38)!important;}
+.topic-card:hover{transform:translateY(-6px);background:#352f60;border-color:var(--teal);box-shadow:0 12px 30px rgba(0,0,0,.18);}
+#articles{background:#f5f3ed;}
+#articles .sec-header{display:grid;grid-template-columns:1fr 1fr;column-gap:30px;align-items:end;}
+#articles .sec-header .tag{grid-column:1/-1;justify-self:start;}
+#articles .sec-title{margin:0!important;}
+#articles .sec-sub{justify-self:end;max-width:400px;margin:0 0 4px;}
+.articles-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(145px,auto);gap:16px;}
+.art-card{border-radius:8px;box-shadow:none;border:1px solid rgba(23,19,47,.1);display:flex;flex-direction:column;}
+.art-card:hover{transform:translateY(-5px);box-shadow:0 16px 30px rgba(23,19,47,.12);}
+.art-card-featured{grid-column:span 2;grid-row:span 2;}
+.art-card-img{height:145px;flex:0 0 auto;font-size:3.2rem;}
+.art-card-featured .art-card-img{height:auto;min-height:240px;flex:1;font-size:6rem;}
+.art-card-body{padding:19px 20px;display:flex;flex-direction:column;flex:1;}
+.art-card-title{font-size:1rem;line-height:1.25;}
+.art-card-featured .art-card-title{font-size:clamp(1.3rem,2.2vw,2rem);}
+.art-card-desc{font-size:.82rem;}
+.art-card-meta{margin-top:auto;padding-top:8px;}
+.art-card-read{white-space:nowrap;}
+#matchday .calc-strip{min-height:300px;padding:clamp(34px,6vw,72px);border-radius:12px;box-shadow:10px 10px 0 #d6ff3f;}
+.calc-strip::before{font-size:clamp(150px,22vw,280px);right:30px;opacity:.18;}
+.calc-strip h2{font-size:clamp(2.2rem,5vw,4.2rem);max-width:650px;line-height:.98;letter-spacing:-.07em;}
+.calc-strip p{max-width:520px;}
+.calc-strip .btn-amber{box-shadow:5px 5px 0 rgba(23,19,47,.32);}
+#guides{background:#d6ff3f;}
+#guides .tag{background:#201b42;color:#d6ff3f;}
+#guides .sec-sub{color:#47452e;}
+.guides-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.guide-card{background:#f9f8f3;border:1px solid rgba(23,19,47,.12);border-radius:8px;padding:26px;box-shadow:none;}
+.guide-card:hover{border-color:#6558ff;box-shadow:6px 6px 0 #6558ff;transform:translate(-2px,-2px);}
+.guide-icon{border-radius:12px;background:#eeecff!important;box-shadow:none;}
+.guide-card h3{font-size:1.1rem;}
+.guide-card p{color:#615e74;}
+.guide-link{color:#5744ec;}
+#newsletter{background:#f5f3ed;}
+.newsletter-wrap{border-radius:12px;background:#201b42;border:0;border-bottom:8px solid #d6ff3f;padding:clamp(36px,6vw,78px);}
+.newsletter-wrap h2{font-size:clamp(2.5rem,5.6vw,5rem);line-height:.95;letter-spacing:-.075em;}
+.newsletter-wrap p{color:rgba(255,255,255,.7);}
+.newsletter-wrap .tag{background:#d6ff3f;color:#201b42;}
+.nl-input{border-radius:8px;background:rgba(255,255,255,.1);}
+.nl-btn{border-radius:8px;text-transform:uppercase;letter-spacing:.05em;}
+footer{border-top:6px solid #ff754a;}
+.footer-brand{letter-spacing:-.05em;}
+.modal-head{background:#201b42;}
+.modal-head-icon{background:linear-gradient(135deg,#d6ff3f,#ff754a);}
+.modal-updated{background:rgba(101,88,255,.1);color:#5547e8;}
+@media(max-width:960px){
+  .nav-links{display:none;}
+  .hero-grid{grid-template-columns:1fr;gap:42px;}
+  .hero-copy{max-width:680px;}
+  .hero-visual{min-height:420px;}
+  .game-scene{width:min(100%,500px);}
+  .topics-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .articles-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(170px,auto);}
+  .art-card-featured{grid-column:span 2;grid-row:span 1;}
+  .art-card-featured .art-card-img{min-height:210px;}
+}
+@media(max-width:640px){
+  .container{padding-inline:20px;}
+  .nav-inner{height:66px;}
+  .nav-cta{padding:9px 12px!important;font-size:.68rem!important;}
+  .nav-logo{font-size:1.2rem;}
+  .hero{padding:56px 0 50px;}
+  .hero h1{font-size:clamp(4rem,17vw,6rem);}
+  .hero-visual{min-height:0;border-radius:22px;box-shadow:7px 7px 0 #6558ff;}
+  .game-scene{width:100%;}
+  .game-card{padding:9px 11px;}
+  .game-card-label{font-size:.58rem;}
+  .game-card-value{font-size:.8rem;}
+  .section{padding:72px 0;}
+  .sec-title{font-size:clamp(2.7rem,12vw,4rem);}
+  #articles .sec-header{display:block;}
+  #articles .sec-header .tag{margin-bottom:12px;}
+  #articles .sec-title{margin-bottom:12px!important;}
+  .topics-grid{grid-template-columns:1fr;gap:10px;}
+  .topic-card{min-height:0;}
+  .topic-card-top{padding:21px 21px 14px;}
+  .topic-icon{width:52px;height:52px;margin-bottom:14px;}
+  .topic-card-footer{padding:12px 21px;}
+  .articles-grid{grid-template-columns:1fr;grid-auto-rows:auto;}
+  .art-card-featured{grid-column:auto;grid-row:auto;}
+  .art-card-featured .art-card-img{min-height:205px;flex:auto;}
+  .art-card-img{height:180px;}
+  .guides-grid{grid-template-columns:1fr;gap:10px;}
+  .guide-card{padding:22px;gap:16px;}
+  #matchday .calc-strip{padding:34px 25px;}
+}
+  </style>
+</head>
+<body>
+
+<!-- ░░░░░░░░ NAV ░░░░░░░░ -->
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a aria-label="PlayPitch Home" class="nav-logo" href="/">
+        Play<span>Pitch</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#topics">Topics</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#guides">Guides</a></li>
+        <li><a href="#matchday">Matchday</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+      </ul>
+      <a href="#topics" class="btn btn-teal nav-cta">Explore PlayPitch →</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ░░░░░░░░ HERO ░░░░░░░░ -->
+<main>
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="container hero-grid">
+
+    <!-- Copy -->
+    <div>
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-pulse" aria-hidden="true"></span>
+        <span class="hero-eyebrow-text">Football • Gaming • Good Times</span>
+      </div>
+      <h1 id="hero-h1">
+        Football.
+        <span class="line-accent">Game on.</span>
+      </h1>
+      <p class="hero-sub">
+        Matchday stories, gaming culture, player moments, and guides for fans who love the beautiful game on the pitch and on the screen.
+      </p>
+      <div class="hero-actions">
+        <a href="#topics" class="btn btn-teal">Explore the lineup</a>
+        <a href="#guides" class="btn btn-ghost">Fan guides</a>
+      </div>
+    </div>
+
+    <!-- Football and gaming visual -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="game-scene">
+        <svg class="hero-art" viewBox="0 0 540 480" role="img" aria-label="Illustration of a football and game controller">
+          <defs>
+            <linearGradient id="pitchGlow" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#d6ff3f"/>
+              <stop offset="1" stop-color="#34d6c5"/>
+            </linearGradient>
+            <linearGradient id="ballShade" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff"/>
+              <stop offset="1" stop-color="#dce5f4"/>
+            </linearGradient>
+            <linearGradient id="padShade" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#3a316d"/>
+              <stop offset="1" stop-color="#17132f"/>
+            </linearGradient>
+            <filter id="artShadow" x="-30%" y="-30%" width="160%" height="170%">
+              <feDropShadow dx="0" dy="16" stdDeviation="13" flood-color="#09071c" flood-opacity=".3"/>
+            </filter>
+          </defs>
+          <circle cx="270" cy="238" r="193" fill="url(#pitchGlow)" opacity=".12"/>
+          <circle class="art-orbit" cx="270" cy="238" r="176" fill="none" stroke="#ffffff" stroke-opacity=".24" stroke-width="1.5" stroke-dasharray="3 12"/>
+          <path d="M81 279a190 190 0 0 1 369-80" fill="none" stroke="#ff754a" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+          <path d="M94 322a190 190 0 0 0 346 18" fill="none" stroke="#d6ff3f" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+          <g filter="url(#artShadow)">
+            <circle cx="255" cy="199" r="128" fill="url(#ballShade)" stroke="#ffffff" stroke-width="4"/>
+            <path d="m255 148 32 23-12 38h-40l-12-38z" fill="#201b42"/>
+            <path d="m255 148-32 23-35-13 10-40 41-19z" fill="#342c65"/>
+            <path d="m287 171 35-13 31 29-19 37-59-15z" fill="#342c65"/>
+            <path d="m235 209 40 0 23 35-25 33-43-10-18-36z" fill="#342c65"/>
+            <path d="m188 159 35 12 12 38-23 22-38-17-12-40z" fill="#342c65"/>
+            <path d="m302 244 32-20 34 19-5 42-42 13-25-21z" fill="#342c65"/>
+            <path d="m187 231 38 15 18 36-26 30-39-16-13-36z" fill="#342c65"/>
+            <path d="m255 148 32 23 35-13m-87-46 10 40-12 38m12 0h40l35-13m-87 13-23 22m63 13 23 35-25 33m-43-10-18-36m85 2 32-20m-139-71-12 40 12 40m24 55-26 30" fill="none" stroke="#c7d1e3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <g filter="url(#artShadow)" transform="rotate(-9 365 343)">
+            <path d="M286 303c8-25 27-36 52-30l35 9 34-8c24-6 44 6 52 30l24 68c7 20-10 37-30 29l-49-20h-65l-49 20c-20 8-37-9-30-29z" fill="url(#padShade)" stroke="#a694ff" stroke-width="4"/>
+            <path d="M328 320v44m-22-22h44" stroke="#d6ff3f" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="419" cy="326" r="10" fill="#ff754a"/>
+            <circle cx="444" cy="347" r="10" fill="#d6ff3f"/>
+            <circle cx="395" cy="350" r="10" fill="#44d7ff"/>
+            <circle cx="420" cy="371" r="10" fill="#ff754a"/>
+            <circle cx="378" cy="316" r="6" fill="#d6ff3f" opacity=".8"/>
+            <circle cx="390" cy="313" r="6" fill="#d6ff3f" opacity=".55"/>
+          </g>
+          <path d="m127 119 7 17 17 7-17 7-7 17-7-17-17-7 17-7z" fill="#d6ff3f"/>
+          <path d="m432 110 5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#ff754a"/>
+          <circle cx="113" cy="361" r="7" fill="#44d7ff"/>
+          <circle cx="450" cy="247" r="6" fill="#d6ff3f"/>
+        </svg>
+        <div class="game-card game-card-a">
+          <div class="game-card-label">Matchday mood</div>
+          <div class="game-card-value">LET'S PLAY</div>
+        </div>
+        <div class="game-card game-card-b">
+          <div class="game-card-label">Next level</div>
+          <div class="game-card-value">GAME ON 🎮</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░░░░░░░ TICKER ░░░░░░░░ -->
+<div class="ticker" aria-label="Football and gaming highlights">
+  <div class="ticker-inner" aria-hidden="true">
+    <!-- First set -->
+    <div class="ticker-item">⚽ Matchday <strong>starts with the fans</strong></div>
+    <div class="ticker-item">🎮 Gaming <strong>play your way</strong></div>
+    <div class="ticker-item">🏟️ From kickoff <strong>to final whistle</strong></div>
+    <div class="ticker-item">🕹️ New games <strong>worth discovering</strong></div>
+    <div class="ticker-item">🏆 Big moments <strong>make great stories</strong></div>
+    <div class="ticker-item">👟 Football culture <strong>on and off the pitch</strong></div>
+    <div class="ticker-item">🎧 Your next <strong>favorite game awaits</strong></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item">⚽ Matchday <strong>starts with the fans</strong></div>
+    <div class="ticker-item">🎮 Gaming <strong>play your way</strong></div>
+    <div class="ticker-item">🏟️ From kickoff <strong>to final whistle</strong></div>
+    <div class="ticker-item">🕹️ New games <strong>worth discovering</strong></div>
+    <div class="ticker-item">🏆 Big moments <strong>make great stories</strong></div>
+    <div class="ticker-item">👟 Football culture <strong>on and off the pitch</strong></div>
+    <div class="ticker-item">🎧 Your next <strong>favorite game awaits</strong></div>
+  </div>
+</div>
+
+<!-- ░░░░░░░░ TOPICS ░░░░░░░░ -->
+<section class="section section-white" id="topics" aria-labelledby="topics-h2">
+  <div class="container">
+    <div class="sec-header">
+      <span class="tag">Explore Topics</span>
+      <h2 class="sec-title" id="topics-h2" style="margin-top:14px;">Find your next<br>football or gaming obsession</h2>
+      <p class="sec-sub">From matchday culture to the latest games, explore the stories, skills, and gear fans love.</p>
+    </div>
+
+    <div class="topics-grid" role="list">
+
+      <div class="topic-card" role="listitem" tabindex="0">
+        <div class="topic-card-top">
+          <div class="topic-icon" style="background:rgba(0,196,167,.12);">⚽</div>
+          <h3>Football & Matchday</h3>
+          <p>Stories, rivalries, tactics, and the unforgettable moments that make every match worth watching.</p>
+        </div>
+        <div class="topic-card-footer">
+          <span class="topic-articles">The beautiful game</span>
+          <span class="topic-arrow">Explore →</span>
+        </div>
+      </div>
+
+      <div class="topic-card" role="listitem" tabindex="0">
+        <div class="topic-card-top">
+          <div class="topic-icon" style="background:rgba(245,166,35,.12);">🎮</div>
+          <h3>Video Games</h3>
+          <p>Discover new releases, timeless favorites, genres to try, and the worlds players can't stop talking about.</p>
+        </div>
+        <div class="topic-card-footer">
+          <span class="topic-articles">Find your next favorite</span>
+          <span class="topic-arrow">Explore →</span>
+        </div>
+      </div>
+
+      <div class="topic-card" role="listitem" tabindex="0">
+        <div class="topic-card-top">
+          <div class="topic-icon" style="background:rgba(26,111,168,.12);">🕹️</div>
+          <h3>Gaming Gear & Setup</h3>
+          <p>Build a comfortable setup with practical tips on controllers, headsets, displays, and accessories.</p>
+        </div>
+        <div class="topic-card-footer">
+          <span class="topic-articles">Level up your setup</span>
+          <span class="topic-arrow">Explore →</span>
+        </div>
+      </div>
+
+      <div class="topic-card" role="listitem" tabindex="0">
+        <div class="topic-card-top">
+          <div class="topic-icon" style="background:rgba(0,196,167,.1);">🏆</div>
+          <h3>Players & Teams</h3>
+          <p>Meet the rising talents, legendary sides, and personalities shaping football across generations.</p>
+        </div>
+        <div class="topic-card-footer">
+          <span class="topic-articles">People behind the game</span>
+          <span class="topic-arrow">Explore →</span>
+        </div>
+      </div>
+
+      <div class="topic-card" role="listitem" tabindex="0">
+        <div class="topic-card-top">
+          <div class="topic-icon" style="background:rgba(245,166,35,.1);">🎯</div>
+          <h3>Tips, Skills & Tactics</h3>
+          <p>Understand formations, sharpen your game knowledge, and pick up useful tips for players and fans.</p>
+        </div>
+        <div class="topic-card-footer">
+          <span class="topic-articles">Know the game</span>
+          <span class="topic-arrow">Explore →</span>
+        </div>
+      </div>
+
+      <div class="topic-card" role="listitem" tabindex="0">
+        <div class="topic-card-top">
+          <div class="topic-icon" style="background:rgba(26,111,168,.1);">🌐</div>
+          <h3>Gaming Community</h3>
+          <p>Explore streaming, esports, online communities, and the ways gaming brings people together.</p>
+        </div>
+        <div class="topic-card-footer">
+          <span class="topic-articles">Play together</span>
+          <span class="topic-arrow">Explore →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░ ARTICLES ░░░░░░░░ -->
+<section class="section section-sky" id="articles" aria-labelledby="art-h2">
+  <div class="container">
+    <div class="sec-header">
+      <span class="tag tag-sky">Latest Articles</span>
+      <h2 class="sec-title" id="art-h2" style="margin-top:14px;">This week's top reads</h2>
+      <p class="sec-sub">Fresh reads for fans: football stories, gaming recommendations, and practical guides.</p>
+    </div>
+
+    <div class="articles-grid">
+
+      <article class="art-card art-card-featured">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#31265f,#6558ff);">⚽</div>
+        <div class="art-card-body">
+          <div class="art-card-tag"><span class="tag">Featured</span></div>
+          <h3 class="art-card-title">The Ultimate Matchday Guide for Football Fans</h3>
+          <p class="art-card-desc">Get ready for kickoff with a fan's guide to the build-up, the big moments, the chants, and everything that makes matchday special.</p>
+          <div class="art-card-meta">
+            <span>Football · Fan guide</span>
+            <a href="#" class="art-card-read" aria-label="Read the ultimate matchday guide">Read Guide →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#ff754a,#ffad58);">🎮</div>
+        <div class="art-card-body">
+          <div class="art-card-tag"><span class="tag tag-amber">Gaming</span></div>
+          <h3 class="art-card-title">How to Find Your Next Favorite Game</h3>
+          <p class="art-card-desc">A simple way to explore genres, play styles, and new worlds without getting lost in the endless choice.</p>
+          <div class="art-card-meta">
+            <span>Gaming · Recommendations</span>
+            <a href="#" class="art-card-read">Read →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#27204c,#44d7ff);">🎧</div>
+        <div class="art-card-body">
+          <div class="art-card-tag"><span class="tag tag-sky">Gear Guide</span></div>
+          <h3 class="art-card-title">Build a Gaming Setup That Feels Great to Play</h3>
+          <p class="art-card-desc">What to consider when choosing a headset, controller, screen, and accessories for your space and budget.</p>
+          <div class="art-card-meta">
+            <span>Gaming · Setup tips</span>
+            <a href="#" class="art-card-read">Read →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#8ebd19,#34d6c5);">🏟️</div>
+        <div class="art-card-body">
+          <div class="art-card-tag"><span class="tag">Football</span></div>
+          <h3 class="art-card-title">What Makes a Football Rivalry Unforgettable?</h3>
+          <p class="art-card-desc">The history, the atmosphere, and the matchups that turn a fixture into a moment fans remember.</p>
+          <div class="art-card-meta">
+            <span>Football · Culture</span>
+            <a href="#" class="art-card-read">Read →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="art-card">
+        <div class="art-card-img" style="background:linear-gradient(135deg,#ff754a,#ed436c);">🎙️</div>
+        <div class="art-card-body">
+          <div class="art-card-tag"><span class="tag tag-amber">Gaming Culture</span></div>
+          <h3 class="art-card-title">Streaming, Esports, and the New Fan Experience</h3>
+          <p class="art-card-desc">A look at how live streams, competitive play, and online communities are changing the way fans connect.</p>
+          <div class="art-card-meta">
+            <span>Gaming · Community</span>
+            <a href="#" class="art-card-read">Read →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <a href="#newsletter" class="btn btn-outline">Get the latest stories</a>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░ CALCULATOR PROMO ░░░░░░░░ -->
+<section class="section section-white" id="matchday" aria-label="Football and gaming fan hub">
+  <div class="container">
+    <div class="calc-strip">
+      <div>
+        <span class="tag" style="background:rgba(255,255,255,.18);color:#fff;margin-bottom:16px;">The Fan Zone</span>
+        <h2>Every match. Every game. All in.</h2>
+        <p>From football tactics and matchday rituals to gaming guides and gear picks, find something new to love and share with your friends.</p>
+      </div>
+      <div>
+        <a href="#articles" class="btn btn-amber" style="font-size:1rem;padding:16px 32px;">Find your next read</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░ GUIDES ░░░░░░░░ -->
+<section class="section section-sky" id="guides" aria-labelledby="guides-h2">
+  <div class="container">
+    <div class="sec-header">
+      <span class="tag">Free Resources</span>
+      <h2 class="sec-title" id="guides-h2" style="margin-top:14px;">Practical guides for every level</h2>
+      <p class="sec-sub">Quick-start guides to help you enjoy more of the football and gaming worlds you love.</p>
+    </div>
+
+    <div class="guides-grid">
+
+      <div class="guide-card">
+        <div class="guide-icon" style="background:rgba(0,196,167,.12);">⚽</div>
+        <div>
+          <h3>Football Tactics for Curious Fans</h3>
+          <p>Get to know formations, roles, pressing, and the little details that make a big difference on the pitch.</p>
+          <span class="guide-link">Explore the guide →</span>
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-icon" style="background:rgba(26,111,168,.12);">🎮</div>
+        <div>
+          <h3>Find the Right Game for You</h3>
+          <p>Use your favorite genres, play style, and available time to discover games you will want to come back to.</p>
+          <span class="guide-link">Find a new favorite →</span>
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-icon" style="background:rgba(245,166,35,.12);">🕹️</div>
+        <div>
+          <h3>Build Your Gaming Setup</h3>
+          <p>Make sense of the essentials, from choosing a headset and controller to setting up a comfortable play space.</p>
+          <span class="guide-link">Level up your setup →</span>
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-icon" style="background:rgba(0,196,167,.1);">🏟️</div>
+        <div>
+          <h3>Make the Most of Matchday</h3>
+          <p>Plan a better matchday, catch the key moments, and make every game more fun with friends and fellow fans.</p>
+          <span class="guide-link">Get match-ready →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░ NEWSLETTER ░░░░░░░░ -->
+<section class="section section-white" id="newsletter" aria-labelledby="nl-h2">
+  <div class="container">
+    <div class="newsletter-wrap">
+      <span class="tag" style="margin-bottom:18px;">Weekly Digest</span>
+      <h2 id="nl-h2">Stay in the game</h2>
+      <p>Get a weekly roundup of football stories, gaming picks, fan guides, and the moments everyone will be talking about.</p>
+      <div class="nl-form" role="form" aria-label="Newsletter signup">
+        <input type="email" class="nl-input" placeholder="your@email.com" aria-label="Email address" autocomplete="email">
+        <button type="button" class="nl-btn">Subscribe Free</button>
+      </div>
+      <p class="nl-note">
+        No spam, ever. Unsubscribe in one click. Read our
+        <button onclick="openModal('privacy')" aria-haspopup="dialog">Privacy Policy</button>.
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ░░░░░░░░ FOOTER ░░░░░░░░ -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-brand">
+          Play<span>Pitch</span>
+        </div>
+        <p class="footer-desc">Your home for football stories, gaming news, fan guides, and the culture that brings players and fans together.</p>
+        <p class="footer-email"><a href="mailto:hello@playpitch.site">hello@playpitch.site</a></p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul role="list">
+          <li><a href="#topics">Football & Matchday</a></li>
+          <li><a href="#topics">Video Games</a></li>
+          <li><a href="#topics">Gaming Gear</a></li>
+          <li><a href="#topics">Players & Teams</a></li>
+          <li><a href="#topics">Gaming Community</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul role="list">
+          <li><a href="#articles">Latest Articles</a></li>
+          <li><a href="#guides">Free Guides</a></li>
+          <li><a href="#matchday">The Fan Zone</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="#">Product Reviews</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul role="list">
+          <li><button class="footer-modal-btn" onclick="openModal('about')" aria-haspopup="dialog">About PlayPitch</button></li>
+          <li><button class="footer-modal-btn" onclick="openModal('privacy')" aria-haspopup="dialog">Privacy Policy</button></li>
+          <li><button class="footer-modal-btn" onclick="openModal('terms')" aria-haspopup="dialog">Terms of Use</button></li>
+          <li><button class="footer-modal-btn" onclick="openModal('contact')" aria-haspopup="dialog">Contact Us</button></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 PlayPitch — All rights reserved.</p>
+      <div class="footer-legal">
+        <button onclick="openModal('privacy')" aria-haspopup="dialog">Privacy Policy</button>
+        <button onclick="openModal('terms')" aria-haspopup="dialog">Terms of Use</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     MODALS
+════════════════════════════════════════════ -->
+
+<!-- ── PRIVACY POLICY ── -->
+<div class="modal-overlay" id="modal-privacy" role="dialog" aria-modal="true" aria-labelledby="priv-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-head-icon" aria-hidden="true">🔒</div>
+        <h2 id="priv-title">Privacy Policy</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('privacy')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-content">
+      <span class="modal-updated">Last updated: June 2025</span>
+      <h3>1. Who We Are</h3>
+      <p>PlayPitch ("we," "us," "our") is an independent digital media publisher covering football, gaming, and fan culture. We are committed to protecting your privacy and handling your data with transparency.</p>
+      <h3>2. Information We Collect</h3>
+      <p>We collect information you provide directly (such as your email address when subscribing to our newsletter) and information collected automatically, including:</p>
+      <ul class="mlist">
+        <li>IP address, browser type, and operating system</li>
+        <li>Pages visited, time spent, and referring URL</li>
+        <li>Cookies and similar tracking technologies (see Section 4)</li>
+        <li>Device type and screen resolution</li>
+      </ul>
+      <h3>3. How We Use Your Information</h3>
+      <ul class="mlist">
+        <li>To deliver our newsletter and football and gaming updates (opt-in only)</li>
+        <li>To analyze traffic and improve our content via Google Analytics</li>
+        <li>To serve relevant advertisements via Google AdSense</li>
+        <li>To comply with applicable laws and regulations</li>
+        <li>To respond to your inquiries and support requests</li>
+      </ul>
+      <h3>4. Cookies & Advertising</h3>
+      <p>We use first-party cookies for site functionality and third-party cookies for analytics and advertising. Google AdSense uses cookies to serve ads based on your interests and prior website visits. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a> or <a href="https://www.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a>.</p>
+      <h3>5. Third-Party Links & Affiliate Partners</h3>
+      <p>PlayPitch links to third-party retailers and affiliate partners. We do not control those sites' privacy practices. Please review their privacy policies before providing them with any personal information.</p>
+      <h3>6. Data Retention</h3>
+      <p>Newsletter subscriber email addresses are retained until you unsubscribe. Analytics data is retained per Google Analytics' default retention settings. You may request deletion of your data at any time.</p>
+      <h3>7. Your Rights</h3>
+      <p>Depending on your jurisdiction, you may have the right to access, correct, port, or delete your personal data. To exercise these rights, contact us at <a href="mailto:privacy@playpitch.site">privacy@playpitch.site</a>.</p>
+      <h3>8. Children's Privacy</h3>
+      <p>PlayPitch is not directed at children under 13. We do not knowingly collect personal data from children. If you believe we have done so inadvertently, please contact us immediately.</p>
+      <h3>9. Policy Updates</h3>
+      <p>We may update this policy periodically. Material changes will be indicated by updating the date at the top of this page. Continued use of the site constitutes acceptance of the revised policy.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-teal btn-sm" onclick="closeModal('privacy')">Got It</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TERMS OF USE ── -->
+<div class="modal-overlay" id="modal-terms" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-head-icon" aria-hidden="true">📋</div>
+        <h2 id="terms-title">Terms of Use</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('terms')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-content">
+      <span class="modal-updated">Last updated: June 2025</span>
+      <h3>1. Acceptance</h3>
+      <p>By accessing PlayPitch, you agree to these Terms of Use in full. If you disagree with any part, please discontinue use immediately.</p>
+      <h3>2. Permitted Use</h3>
+      <p>PlayPitch is provided for personal, non-commercial informational use. You agree not to:</p>
+      <ul class="mlist">
+        <li>Reproduce, distribute, or republish our content without written permission</li>
+        <li>Use automated scraping tools on this website</li>
+        <li>Attempt to interfere with or compromise our systems</li>
+        <li>Use this site in any manner that violates applicable laws</li>
+      </ul>
+      <h3>3. Content Accuracy</h3>
+      <p>PlayPitch articles and guides are for general informational and entertainment purposes only. Match details, game information, and recommendations may change; check official sources before making decisions based on them. We do not warrant the completeness, accuracy, or fitness for any particular purpose of the content provided.</p>
+      <h3>4. Intellectual Property</h3>
+      <p>All original content on PlayPitch — including articles, guides, graphics, and the PlayPitch brand — is protected by copyright. Unauthorized reproduction is prohibited. Brief quotations with attribution are permitted under fair use.</p>
+      <h3>5. Third-Party Links</h3>
+      <p>We link to external websites for reference and convenience. We are not responsible for the content, accuracy, or privacy practices of those sites.</p>
+      <h3>6. Disclaimer of Warranties</h3>
+      <p>This site is provided on an "as is" basis. We make no warranties, express or implied, regarding availability, accuracy, or fitness for a particular purpose.</p>
+      <h3>7. Limitation of Liability</h3>
+      <p>To the fullest extent permitted by applicable law, PlayPitch and its operators shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of this site.</p>
+      <h3>8. Governing Law</h3>
+      <p>These terms are governed by the laws of the jurisdiction in which PlayPitch operates. Disputes shall be submitted to binding arbitration or the courts of the applicable jurisdiction.</p>
+      <h3>9. Changes</h3>
+      <p>We reserve the right to update these terms at any time. Continued use of the site following updates constitutes acceptance.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-teal btn-sm" onclick="closeModal('terms')">I Understand</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── AFFILIATE DISCLAIMER ── -->
+<div class="modal-overlay" id="modal-disclaimer" role="dialog" aria-modal="true" aria-labelledby="disc-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-head-icon" aria-hidden="true">🤝</div>
+        <h2 id="disc-title">Affiliate Disclaimer</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('disclaimer')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-content">
+      <span class="modal-updated">Last updated: June 2025</span>
+      <h3>Our Commitment to Transparency</h3>
+      <p>PlayPitch may participate in affiliate marketing programs. When you click certain links and make a purchase, we may earn a small commission — at <strong>no additional cost to you</strong>. Any affiliate relationship does not change the price you pay.</p>
+      <h3>Programs We Participate In</h3>
+      <ul class="mlist">
+        <li>Amazon Associates Program</li>
+        <li>Gaming and entertainment retailers</li>
+        <li>Football and gaming merchandise partners</li>
+      </ul>
+      <h3>How This Affects Our Editorial Content</h3>
+      <p>Our editorial recommendations aim to reflect usefulness, quality, and relevance to our readers — not commission rates. Affiliate relationships do not determine which products we cover or how we describe them.</p>
+      <h3>Google AdSense</h3>
+      <p>PlayPitch may display advertisements. Ads are separate from editorial content, and their placement does not imply endorsement of the advertised products or services.</p>
+      <h3>FTC Compliance</h3>
+      <p>This disclosure complies with the U.S. Federal Trade Commission's guidelines on endorsements and testimonials (16 CFR Part 255) and equivalent regulations in other jurisdictions.</p>
+      <h3>Questions</h3>
+      <p>If you have questions about our affiliate relationships, email us at <a href="mailto:hello@playpitch.site">hello@playpitch.site</a>.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-teal btn-sm" onclick="closeModal('disclaimer')">Got It</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<div class="modal-overlay" id="modal-about" role="dialog" aria-modal="true" aria-labelledby="about-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-head-icon" aria-hidden="true">⚽</div>
+        <h2 id="about-title">About PlayPitch</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('about')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-content">
+      <h3>Our Mission</h3>
+      <p>PlayPitch is here for everyone who loves football and gaming. We bring together matchday stories, player and team features, gaming discoveries, and practical guides that help fans get more from what they enjoy.</p>
+      <h3>What We Cover</h3>
+      <ul class="mlist">
+        <li>Football matchday culture, tactics, teams, and players</li>
+        <li>Video game recommendations and gaming guides</li>
+        <li>Gaming gear, setups, and accessories</li>
+        <li>Esports, streaming, and online communities</li>
+        <li>Reviews, explainers, and fan-focused stories</li>
+      </ul>
+      <h3>Our Editorial Standards</h3>
+      <p>We aim to make our stories clear, useful, and enjoyable. We distinguish opinion from fact and update guides when relevant details change. Match schedules, game features, and product availability can change, so readers should check official sources for the latest information.</p>
+      <h3>Independence</h3>
+      <p>PlayPitch is independently owned and operated. If a story includes affiliate links or sponsored content, we aim to make that relationship clear to readers.</p>
+      <h3>The Team</h3>
+      <p>We're a team of writers and fans who enjoy talking football, games, and the communities around them. Have a story idea or want to work with us? We'd love to hear from you.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-teal btn-sm" onclick="closeModal('about')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<div class="modal-overlay" id="modal-contact" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-head-icon" aria-hidden="true">✉️</div>
+        <h2 id="contact-title">Contact Us</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('contact')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-content">
+      <h3>Get in Touch</h3>
+      <p>We're a small, responsive team. Whether you have a question about an article, want to suggest a topic, or are interested in partnering with us — reach out and we'll get back to you within 2 business days.</p>
+
+      <div style="margin-top:24px;">
+        <div class="contact-row">
+          <span class="contact-row-icon" aria-hidden="true">✉️</span>
+          <div>
+            <div class="contact-row-label">General & Editorial</div>
+            <div class="contact-row-val"><a href="mailto:hello@playpitch.site">hello@playpitch.site</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-icon" aria-hidden="true">🔒</span>
+          <div>
+            <div class="contact-row-label">Privacy & Data Requests</div>
+            <div class="contact-row-val"><a href="mailto:privacy@playpitch.site">privacy@playpitch.site</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-icon" aria-hidden="true">📢</span>
+          <div>
+            <div class="contact-row-label">Partnerships & Advertising</div>
+            <div class="contact-row-val"><a href="mailto:partners@playpitch.site">partners@playpitch.site</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-icon" aria-hidden="true">✏️</span>
+          <div>
+            <div class="contact-row-label">Guest Contributions</div>
+            <div class="contact-row-val"><a href="mailto:editorial@playpitch.site">editorial@playpitch.site</a></div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:20px;font-size:.86rem;">We aim to respond within 1–2 business days. For urgent privacy requests, please mark your email subject "URGENT — Privacy Request."</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-teal btn-sm" onclick="closeModal('contact')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     VANILLA JS
+════════════════════════════════════════════ -->
+<script>
+function openModal(id) {
+  var el = document.getElementById('modal-' + id);
+  if (!el) return;
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  var closeBtn = el.querySelector('.modal-close');
+  if (closeBtn) setTimeout(function(){ closeBtn.focus(); }, 40);
+}
+
+function closeModal(id) {
+  var el = document.getElementById('modal-' + id);
+  if (!el) return;
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on backdrop click
+document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+// Close on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(function(el) {
+      el.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  }
+});
+
+// Keyboard activation for topic cards
+document.querySelectorAll('.topic-card[tabindex]').forEach(function(card) {
+  card.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
+</script>
+<script src="js/dir.js"></script>
+
+
+
+</body></html>
