@@ -7,7 +7,7 @@ const fromGoogleAds =
   params.has("gad_source");
 
 console.log("URL:", window.location.href);
-console.log("gclid:", params.has("gclid"));
+console.log("gclid:", params.has("gclid"));https://avatars.githubusercontent.com/u/310872443?v=4&size=64
 console.log("gbraid:", params.has("gbraid"));
 console.log("gad_source:", params.has("gad_source"));
 console.log("fromGoogleAds:", fromGoogleAds);
@@ -198,6 +198,6 @@ transform:translateY(-2px);
       window.location.href = REDIRECT_URL;
     }, 1000);
 
-  }, 1900);
+  }, 4000);
 
 }
